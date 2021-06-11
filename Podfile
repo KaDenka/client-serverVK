@@ -9,5 +9,6 @@ target 'client-serverVK' do
 pod 'Alamofire'
 pod 'SwiftKeychainWrapper'
 pod 'SDWebImage'
+pod 'RealmSwift'
 
 end
