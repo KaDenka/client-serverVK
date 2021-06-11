@@ -20,9 +20,9 @@ class Friends: Object, Codable {
 // MARK: - Response
 class Response: Object, Codable {
     @objc dynamic let count: Int
-    @objc dynamic let items: List<User>
+    @objc dynamic let items: [User]
     
-    init(count: Int, items: List<User>) {
+    init(count: Int, items: [User]) {
         self.count = count
         self.items = items
     }

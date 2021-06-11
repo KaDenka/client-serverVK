@@ -11,12 +11,21 @@ import RealmSwift
 // MARK: - Groups
 class Groups: Object, Codable {
     @objc dynamic let response: Answer
+    
+    init(response: Answer) {
+        self.response = response
+    }
 }
 
 // MARK: - Answer
 class Answer: Object, Codable {
     @objc dynamic let count: Int
-    @objc dynamic let items: List<GroupElement>
+    @objc dynamic let items: [GroupElement]
+    
+    init(count: Int, items: [GroupElement]) {
+        self.count = count
+        self.items = items
+    }
 }
 
 // MARK: - GroupElement
@@ -39,5 +48,19 @@ class GroupElement: Object, Codable {
         case photo50 = "photo_50"
         case photo100 = "photo_100"
         case photo200 = "photo_200"
+    }
+    
+    init(id: Int, name: String, screenName: String, isClosed: Int, type: String, isAdmin: Int, isMember: Int, isAdvertiser: Int, photo50: String, photo100: String, photo200: String) {
+        self.id = id
+        self.name = name
+        self.screenName = screenName
+        self.isClosed = isClosed
+        self.type = type
+        self.isAdmin = isAdmin
+        self.isMember = isMember
+        self.isAdvertiser = isAdvertiser
+        self.photo50 = photo50
+        self.photo100 = photo100
+        self.photo200 = photo200
     }
 }

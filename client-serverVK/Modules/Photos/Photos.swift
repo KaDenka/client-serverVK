@@ -20,9 +20,9 @@ class Photos: Object, Codable {
 // MARK: - Collection
 class Collection: Object, Codable {
     @objc dynamic let count: Int
-    @objc dynamic let items: List<Item>
+    @objc dynamic let items: [Item]
 
-    init(count: Int, items: List<Item>) {
+    init(count: Int, items: [Item]) {
         self.count = count
         self.items = items
     }
@@ -32,10 +32,10 @@ class Collection: Object, Codable {
 class Item: Object, Codable {
     @objc dynamic let albumID, id, date: Int
     @objc dynamic let text: String
-    @objc dynamic let sizes: List<Photo>
+    @objc dynamic let sizes: [Photo]
     @objc dynamic let hasTags: Bool
     @objc dynamic let ownerID: Int
-    @objc dynamic let lat, long: Double?
+    @objc dynamic let lat, long: Double
 
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"
@@ -45,7 +45,7 @@ class Item: Object, Codable {
         case lat, long
     }
 
-    init(albumID: Int, id: Int, date: Int, text: String, sizes: List<Photo>, hasTags: Bool, ownerID: Int, lat: Double?, long: Double?) {
+    init(albumID: Int, id: Int, date: Int, text: String, sizes: [Photo], hasTags: Bool, ownerID: Int, lat: Double, long: Double) {
         self.albumID = albumID
         self.id = id
         self.date = date
