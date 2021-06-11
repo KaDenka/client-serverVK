@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 // MARK: - Friends
-class Friends: Codable {
-    let response: Response
+class Friends: Object, Codable {
+    @objc dynamic let response: Response
     
     init(response: Response) {
         self.response = response
@@ -18,25 +18,27 @@ class Friends: Codable {
 }
 
 // MARK: - Response
-class Response: Codable {
-    let count: Int
-    let items: [User]
+class Response: Object, Codable {
+    @objc dynamic let count: Int
+    @objc dynamic let items: List<User>
     
-    init(count: Int, items: [User]) {
+    init(count: Int, items: List<User>) {
         self.count = count
         self.items = items
     }
 }
 
 // MARK: - User
-class User: Codable {
-    let firstName: String
-    let id: Int
-    let lastName: String
-    let canAccessClosed, isClosed: Bool
-    let photo50: String
-    let online: Int
-    let nickname, trackCode: String
+class User: Object, Codable {
+    @objc dynamic let firstName: String
+    @objc dynamic let id: Int
+    @objc dynamic let lastName: String
+    @objc dynamic let canAccessClosed: Bool
+    @objc dynamic let isClosed: Bool
+    @objc dynamic let photo50: String
+    @objc dynamic let online: Int
+    @objc dynamic let nickname: String
+    @objc dynamic let trackCode: String
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
@@ -45,7 +47,8 @@ class User: Codable {
         case canAccessClosed = "can_access_closed"
         case isClosed = "is_closed"
         case photo50 = "photo_50"
-        case online, nickname
+        case online
+        case nickname
         case trackCode = "track_code"
     }
     

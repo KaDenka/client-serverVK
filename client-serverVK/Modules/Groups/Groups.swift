@@ -6,26 +6,27 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - Groups
-struct Groups: Codable {
-    let response: Answer
+class Groups: Object, Codable {
+    @objc dynamic let response: Answer
 }
 
 // MARK: - Answer
-struct Answer: Codable {
-    let count: Int
-    let items: [GroupElement]
+class Answer: Object, Codable {
+    @objc dynamic let count: Int
+    @objc dynamic let items: List<GroupElement>
 }
 
 // MARK: - GroupElement
-struct GroupElement: Codable {
-    let id: Int
-    let name, screenName: String
-    let isClosed: Int
-    let type: String
-    let isAdmin, isMember, isAdvertiser: Int
-    let photo50, photo100, photo200: String
+class GroupElement: Object, Codable {
+    @objc dynamic let id: Int
+    @objc dynamic let name, screenName: String
+    @objc dynamic let isClosed: Int
+    @objc dynamic let type: String
+    @objc dynamic let isAdmin, isMember, isAdvertiser: Int
+    @objc dynamic let photo50, photo100, photo200: String
 
     enum CodingKeys: String, CodingKey {
         case id, name
