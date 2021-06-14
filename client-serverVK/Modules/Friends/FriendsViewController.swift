@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -14,6 +15,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var apiService = APIRequests()
     
     var friends: [Friend] = []
+    
+    var friend = Friend()
     
 
     @IBOutlet weak var tableView: UITableView! {
@@ -30,12 +33,18 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        let group = DispatchGroup()
 //
 //        group.enter()
+        let realm = try! Realm()
         
+        if !realm.objects(Friend.self).isEmpty {
+            self.friends = friend.loadFriendsFromRealm()
+            self.tableView.reloadData()
+        } else {
         apiService.getFriends { [weak self] list in
             guard let self = self else { return }
             self.friends = list
             self.tableView.reloadData()
-            
+            self.friend.updateFriendsInRealm(friends: self.friends)
+        }
 //            group.leave()
         }
         

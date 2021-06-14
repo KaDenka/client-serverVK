@@ -30,7 +30,25 @@ class Friend: Object, Codable {
         self.firstName = try itemsValues.decode(String.self, forKey: .firstName)
         self.lastName = try itemsValues.decode(String.self, forKey: .lastName)
         self.avatarPhoto = try itemsValues.decode(String.self, forKey: .avatarPhoto)
+    }
+    
+    func updateFriendsInRealm(friends: [Friend]) {
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(friends)
+        }
+    }
+    
+    func loadFriendsFromRealm() -> [Friend] {
+        do {
+            let realm = try Realm()
+            let friends = [Friend](realm.objects(Friend.self))
+            return friends
+        } catch {
+            print(error)
+        }
         
+        return [Friend]()
     }
 }
 

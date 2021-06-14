@@ -29,6 +29,26 @@ class Group: Object, Codable {
         case groupName = "name"
         case groupAvatar = "photo_100"
     }
+    
+    func updateGroupsInRealm(groups: [Group]) {
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(groups)
+        }
+    }
+    
+    func loadGroupsFromRealm() -> [Group] {
+        do {
+            let realm = try Realm()
+            let groups = [Group](realm.objects(Group.self))
+            return groups
+        } catch {
+            print(error)
+        }
+        
+        return [Group]()
+    }
+    
 }
 
 struct GroupsRequestAnswer: Codable {
