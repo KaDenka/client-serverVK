@@ -13,7 +13,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var apiService = APIRequests()
     
-    var friends: [User] = []
+    var friends: [Friend] = []
     
 
     @IBOutlet weak var tableView: UITableView! {
@@ -31,9 +31,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 //
 //        group.enter()
         
-        apiService.getFriends { [weak self] users in
+        apiService.getFriends { [weak self] list in
             guard let self = self else { return }
-            self.friends = users
+            self.friends = list
             self.tableView.reloadData()
             
 //            group.leave()
@@ -53,7 +53,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
         let friend = friends[indexPath.row]
         cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
-        if let url = URL(string: friend.photo50) {
+        if let url = URL(string: friend.avatarPhoto) {
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)
             cell.imageView?.image = image

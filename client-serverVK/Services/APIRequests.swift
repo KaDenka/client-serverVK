@@ -19,13 +19,14 @@ class APIRequests {
     
     let version = "5.131"
     
-    func getFriends(completion: @escaping([User])->()) {
+    func getFriends(completion: @escaping([Friend])->()) {
         AF.request("\(baseUrl)/friends.get?fields=online,photo_50,nickname&access_token=\(Session.shared.authorizedToken)&v=\(version)").responseData { response in
             guard let data = response.value else {return}
             
-            guard let friendsResponse = try? JSONDecoder().decode(Friends.self, from: data) else {return}
+            guard let friendsResponse = try? JSONDecoder().decode(FriendsRequestAnswer.self, from: data) else { print("Not decoded"); return }
             
-            let friends = friendsResponse.response.items
+            
+            let friends = friendsResponse.friendsRequestAnswer.friendsList
             
             DispatchQueue.main.async {
                 completion(friends)
@@ -34,30 +35,31 @@ class APIRequests {
     }
     
     
-    func getGroups(completion: @escaping([GroupElement])->()) {
+    func getGroups(completion: @escaping([Group])->()) {
         AF.request("\(baseUrl)/groups.get?extended=1&filter=groups&access_token=\(Session.shared.authorizedToken)&v=\(version)").responseData{ response in
             guard let data = response.value else {return}
             
-            guard let groupsResponse = try? JSONDecoder().decode(Groups.self, from: data) else {return}
+            guard let groupsResponse = try? JSONDecoder().decode(GroupsRequestAnswer.self, from: data) else {return}
             
-            let groupsList = groupsResponse.response.items
+            let groups = groupsResponse.groupsRequestAnswer.groupsList
             
             DispatchQueue.main.async {
-                completion(groupsList)
+                completion(groups)
             }
         }
     }
     
-    func getPhotos(completion: @escaping([Item])->()) {
+    func getPhotos(completion: @escaping([PhotoCollection])->()) {
         AF.request("\(baseUrl)/photos.get?album_id=wall&rev=0&access_token=\(Session.shared.authorizedToken)&v=\(version)").responseData{ response in
             guard let data = response.value else { return }
             
-            guard let photoResponse = try? JSONDecoder().decode(Photos.self, from: data) else {return}
+            guard let photoResponse = try? JSONDecoder().decode(PhotosRequestAnswer.self, from: data) else {return}
             
-            let photosCollection = photoResponse.response.items
+            let photoCollection = photoResponse.photosRequestAnswer.photoItems
+            
             
             DispatchQueue.main.async {
-               completion(photosCollection)
+               completion(photoCollection)
             }
         }
     }

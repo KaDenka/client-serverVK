@@ -11,7 +11,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     
     let apiService = APIRequests()
     
-    var groupsList: [GroupElement] = []
+    var groupsList: [Group] = []
 
     @IBOutlet weak var tableView: UITableView!{
         didSet {
@@ -40,8 +40,8 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
         let group = groupsList[indexPath.row]
-        cell.textLabel?.text = "\(group.name)"
-        if let url = URL(string: group.photo200) {
+        cell.textLabel?.text = "\(group.groupName)"
+        if let url = URL(string:group.groupAvatar) {
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)
             cell.imageView?.image = image

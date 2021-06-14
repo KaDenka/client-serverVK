@@ -10,9 +10,9 @@
 		88CC4EFFAA54D52E7C01B5A7 /* Pods_client_serverVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2F2061F4AD5F93AD4C29BE1 /* Pods_client_serverVK.framework */; };
 		CA68FE91266D062300DAF296 /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68FE90266D062300DAF296 /* APIRequests.swift */; };
 		CA68FE96266D0CE600DAF296 /* DataPrettyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68FE95266D0CE600DAF296 /* DataPrettyJson.swift */; };
-		CA68FE9A266D222200DAF296 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68FE99266D222200DAF296 /* Friends.swift */; };
-		CA68FE9C266D2C7D00DAF296 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68FE9B266D2C7D00DAF296 /* Groups.swift */; };
-		CA8BEF94266D3BBC008BB9B2 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BEF93266D3BBC008BB9B2 /* Photos.swift */; };
+		CA68FE9A266D222200DAF296 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68FE99266D222200DAF296 /* Friend.swift */; };
+		CA68FE9C266D2C7D00DAF296 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68FE9B266D2C7D00DAF296 /* Group.swift */; };
+		CA8BEF94266D3BBC008BB9B2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BEF93266D3BBC008BB9B2 /* Photo.swift */; };
 		CA8BEF96266D4AE8008BB9B2 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BEF95266D4AE8008BB9B2 /* PhotoCollectionViewCell.swift */; };
 		CA91DD02266CCFFB003C0A99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DD01266CCFFB003C0A99 /* AppDelegate.swift */; };
 		CA91DD04266CCFFB003C0A99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA91DD03266CCFFB003C0A99 /* SceneDelegate.swift */; };
@@ -32,9 +32,9 @@
 		C32F3DCB841C8A9B2E7FC203 /* Pods-client-serverVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client-serverVK.debug.xcconfig"; path = "Target Support Files/Pods-client-serverVK/Pods-client-serverVK.debug.xcconfig"; sourceTree = "<group>"; };
 		CA68FE90266D062300DAF296 /* APIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
 		CA68FE95266D0CE600DAF296 /* DataPrettyJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPrettyJson.swift; sourceTree = "<group>"; };
-		CA68FE99266D222200DAF296 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
-		CA68FE9B266D2C7D00DAF296 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
-		CA8BEF93266D3BBC008BB9B2 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		CA68FE99266D222200DAF296 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		CA68FE9B266D2C7D00DAF296 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		CA8BEF93266D3BBC008BB9B2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CA8BEF95266D4AE8008BB9B2 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA91DCFE266CCFFB003C0A99 /* client-serverVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "client-serverVK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA91DD01266CCFFB003C0A99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				CAEFBAFF266CE58300E6B928 /* FriendsViewController.swift */,
-				CA68FE99266D222200DAF296 /* Friends.swift */,
+				CA68FE99266D222200DAF296 /* Friend.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -161,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				CAEFBB02266CE5A100E6B928 /* GroupsViewController.swift */,
-				CA68FE9B266D2C7D00DAF296 /* Groups.swift */,
+				CA68FE9B266D2C7D00DAF296 /* Group.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 			children = (
 				CAEFBB04266CE5B200E6B928 /* PhotosViewController.swift */,
 				CA8BEF95266D4AE8008BB9B2 /* PhotoCollectionViewCell.swift */,
-				CA8BEF93266D3BBC008BB9B2 /* Photos.swift */,
+				CA8BEF93266D3BBC008BB9B2 /* Photo.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -307,13 +307,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA8BEF94266D3BBC008BB9B2 /* Photos.swift in Sources */,
+				CA8BEF94266D3BBC008BB9B2 /* Photo.swift in Sources */,
 				CA8BEF96266D4AE8008BB9B2 /* PhotoCollectionViewCell.swift in Sources */,
 				CAEFBB08266CE8FA00E6B928 /* Session.swift in Sources */,
 				CAEFBB00266CE58300E6B928 /* FriendsViewController.swift in Sources */,
-				CA68FE9C266D2C7D00DAF296 /* Groups.swift in Sources */,
+				CA68FE9C266D2C7D00DAF296 /* Group.swift in Sources */,
 				CA68FE91266D062300DAF296 /* APIRequests.swift in Sources */,
-				CA68FE9A266D222200DAF296 /* Friends.swift in Sources */,
+				CA68FE9A266D222200DAF296 /* Friend.swift in Sources */,
 				CA91DD06266CCFFB003C0A99 /* LogInViewController.swift in Sources */,
 				CA91DD02266CCFFB003C0A99 /* AppDelegate.swift in Sources */,
 				CAEFBB05266CE5B200E6B928 /* PhotosViewController.swift in Sources */,
