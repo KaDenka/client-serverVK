@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -20,9 +19,6 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
             collectionView.dataSource = self
         }
     }
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

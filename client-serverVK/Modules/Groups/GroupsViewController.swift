@@ -6,17 +6,12 @@
 //
 
 import UIKit
-import RealmSwift
 
 class GroupsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let apiService = APIRequests()
     
     var groupsList: [Group] = []
-    
-    var groupRealm = Group()
-    
-    
 
     @IBOutlet weak var tableView: UITableView!{
         didSet {
@@ -31,20 +26,10 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        let realm = try! Realm()
-        
-        if !realm.objects(Group.self).isEmpty {
-            self.groupsList = self.groupRealm.loadGroupsFromRealm()
-            self.tableView.reloadData()
-        } else {
         apiService.getGroups { [weak self] groups in
             guard let self = self else { return }
             self.groupsList = groups
             self.tableView.reloadData()
-            self.groupRealm.updateGroupsInRealm(groups: self.groupsList)
-        }
         }
 
     }
