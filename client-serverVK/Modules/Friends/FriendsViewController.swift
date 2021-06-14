@@ -7,13 +7,16 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var apiService = APIRequests()
     
-    var friends: [User] = []
+    var friends: [Friend] = []
+    
+    var friend = Friend()
     
 
     @IBOutlet weak var tableView: UITableView! {
@@ -30,12 +33,18 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        let group = DispatchGroup()
 //
 //        group.enter()
+        let realm = try! Realm()
         
-        apiService.getFriends { [weak self] users in
-            guard let self = self else { return }
-            self.friends = users
+        if !realm.objects(Friend.self).isEmpty {
+            self.friends = friend.loadFriendsFromRealm()
             self.tableView.reloadData()
-            
+        } else {
+        apiService.getFriends { [weak self] list in
+            guard let self = self else { return }
+            self.friends = list
+            self.tableView.reloadData()
+            self.friend.updateFriendsInRealm(friends: self.friends)
+        }
 //            group.leave()
         }
         
@@ -53,7 +62,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
         let friend = friends[indexPath.row]
         cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
-        if let url = URL(string: friend.photo50) {
+        if let url = URL(string: friend.avatarPhoto) {
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)
             cell.imageView?.image = image

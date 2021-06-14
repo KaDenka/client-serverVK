@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let apiService = APIRequests()
     
-    var groupsList: [GroupElement] = []
+    var groupsList: [Group] = []
+    
+    var groupRealm = Group()
+    
+    
 
     @IBOutlet weak var tableView: UITableView!{
         didSet {
@@ -26,10 +31,20 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        let realm = try! Realm()
+        
+        if !realm.objects(Group.self).isEmpty {
+            self.groupsList = self.groupRealm.loadGroupsFromRealm()
+            self.tableView.reloadData()
+        } else {
         apiService.getGroups { [weak self] groups in
             guard let self = self else { return }
             self.groupsList = groups
             self.tableView.reloadData()
+            self.groupRealm.updateGroupsInRealm(groups: self.groupsList)
+        }
         }
 
     }
@@ -40,8 +55,8 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
         let group = groupsList[indexPath.row]
-        cell.textLabel?.text = "\(group.name)"
-        if let url = URL(string: group.photo200) {
+        cell.textLabel?.text = "\(group.groupName)"
+        if let url = URL(string:group.groupAvatar) {
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)
             cell.imageView?.image = image

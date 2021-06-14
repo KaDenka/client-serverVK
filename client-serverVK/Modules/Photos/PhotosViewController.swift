@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let apiService = APIRequests()
     
-    var photos: [Item] = []
+    var photos: [Photo] = []
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -19,12 +20,18 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
             collectionView.dataSource = self
         }
     }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         apiService.getPhotos { [weak self] photo in
             guard let self = self else { return }
-            self.photos = photo
+            for image in photo {
+                guard let image = image.photoSizes.first else {return}
+                self.photos.append(image)
+            }
             self.collectionView.reloadData()
         }
         
@@ -36,7 +43,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as! PhotoCollectionViewCell
         
         let image = photos[indexPath.row]
-        guard let imageUrl = image.sizes.first?.url else {return cell}
+        let imageUrl = image.photoUrl
         
         if let url = URL(string: imageUrl) {
             let data = try? Data(contentsOf: url)
